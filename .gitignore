@@ -1,4 +1,7 @@
 /node_modules/
 /public/build/
+/public/fonts/material-design-icons/*
+!/public/fonts/material-design-icons/iconfont/MaterialIcons-Regular.woff2
+package-lock.json
 
 .DS_Store

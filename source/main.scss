@@ -1,0 +1,24 @@
+@use "@material/theme" with (
+  $primary: #1a73e8,
+  $secondary: red,
+  $on-primary: #442b2d,
+  $on-secondary: #442b2d,
+);
+@use "@material/typography/mdc-typography";
+
+@use "@material/drawer";
+@use "@material/list";
+@use "@material/card";
+@use "@material/button/styles";
+@use "@material/shape";
+
+@include card.core-styles;
+@include drawer.core-styles;
+@include drawer.dismissible-core-styles;
+@include drawer.modal-core-styles;
+@include list.core-styles;
+
+:root {
+  --mdc-typography-font-family: 'Roboto', sans-serif;
+  --card-title: #919191;
+}

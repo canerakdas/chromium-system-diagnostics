@@ -1,0 +1,48 @@
+<script>
+  export let title
+  export let seperator
+  export let items
+
+  import { Link } from 'svelte-routing'
+  import { createEventDispatcher } from 'svelte'
+
+  const dispatch = createEventDispatcher()
+</script>
+
+{#if seperator === true}
+  <hr class="mdc-list-divider" />
+{/if}
+<h6 class="mdc-list-group__subheader">{title}</h6>
+
+{#if items.length}
+  {#each items as Item}
+    <Link
+      class={Item.active === true
+        ? 'mdc-list-item mdc-list-item--activated'
+        : 'mdc-list-item'}
+      to={Item.target}
+      title={Item.alt}
+      on:click={() => {
+        dispatch('setActive', {
+          item: Item,
+        })
+      }}
+    >
+      <span class="mdc-list-item__ripple" />
+      <i class="material-icons mdc-list-item__graphic" aria-hidden="true"
+        >{Item.Icon}</i
+      >
+      <span class="mdc-list-item__text">{Item.title}</span>
+    </Link>
+  {/each}
+{/if}
+
+<style>
+  :global(.mdc-drawer .mdc-list-item) {
+    margin: 0px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+  }
+</style>
