@@ -119,20 +119,6 @@
     {/each}
   </div>
   <!-- Disk Section -->
-
-  <!-- Display Section -->
-  <CardTitle title="Display" hash="display" />
-  <div class="mdc-card">
-    {#each page.storage.detail as storage}
-      <CardItemIcon
-        title={storage.name}
-        description={storage.id}
-        icon="tv"
-        fragment={(storage.capacity / 1000000000).toFixed(2)}
-      />
-    {/each}
-  </div>
-  <!-- Display Section -->
 </main>
 
 <style>
