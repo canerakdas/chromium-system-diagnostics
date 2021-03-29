@@ -71,7 +71,6 @@
       (result) => {
         if (!chrome.runtime.lastError) {
           page.memory = result
-          console.log(result)
         }
       }
     )
