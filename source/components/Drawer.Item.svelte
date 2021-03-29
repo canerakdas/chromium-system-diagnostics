@@ -9,33 +9,35 @@
   const dispatch = createEventDispatcher()
 </script>
 
-{#if seperator === true}
-  <hr class="mdc-list-divider" />
-{/if}
-<h6 class="mdc-list-group__subheader">{title}</h6>
+<div>
+  {#if seperator === true}
+    <hr class="mdc-list-divider" />
+  {/if}
+  <h6 class="mdc-list-group__subheader">{title}</h6>
 
-{#if items.length}
-  {#each items as Item}
-    <Link
-      class={Item.active === true
-        ? 'mdc-list-item mdc-list-item--activated'
-        : 'mdc-list-item'}
-      to={Item.target}
-      title={Item.alt}
-      on:click={() => {
-        dispatch('setActive', {
-          item: Item,
-        })
-      }}
-    >
-      <span class="mdc-list-item__ripple" />
-      <i class="material-icons mdc-list-item__graphic" aria-hidden="true"
-        >{Item.Icon}</i
+  {#if items.length}
+    {#each items as Item}
+      <Link
+        class={Item.active === true
+          ? 'mdc-list-item mdc-list-item--activated'
+          : 'mdc-list-item'}
+        to={Item.target}
+        title={Item.alt}
+        on:click={() => {
+          dispatch('setActive', {
+            item: Item,
+          })
+        }}
       >
-      <span class="mdc-list-item__text">{Item.title}</span>
-    </Link>
-  {/each}
-{/if}
+        <span class="mdc-list-item__ripple" />
+        <i class="material-icons mdc-list-item__graphic" aria-hidden="true"
+          >{Item.icon}</i
+        >
+        <span class="mdc-list-item__text">{Item.title}</span>
+      </Link>
+    {/each}
+  {/if}
+</div>
 
 <style>
   :global(.mdc-drawer .mdc-list-item) {
@@ -44,5 +46,9 @@
     border-bottom-right-radius: 30px;
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
+    padding-left: 1rem;
+  }
+  .mdc-list-item__graphic {
+    margin-right: 1rem;
   }
 </style>
