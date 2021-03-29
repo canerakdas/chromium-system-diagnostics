@@ -1,8 +1,6 @@
 @use "@material/theme" with (
   $primary: #1a73e8,
-  $secondary: red,
-  $on-primary: #442b2d,
-  $on-secondary: #442b2d,
+  $secondary: #384349,
 );
 @use "@material/typography/mdc-typography";
 
@@ -11,7 +9,11 @@
 @use "@material/card";
 @use "@material/button/styles";
 @use "@material/shape";
+@use "@material/dialog";
+@use "@material/switch";
 
+@include switch.core-styles;
+@include dialog.core-styles;
 @include card.core-styles;
 @include drawer.core-styles;
 @include drawer.dismissible-core-styles;
