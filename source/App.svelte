@@ -1,13 +1,19 @@
 <script>
+  import { onMount } from 'svelte'
+
   import Drawer from './components/Drawer.svelte'
+
   import SystemData from './screens/SystemData.svelte'
   import SystemDiagnostics from './screens/SystemDiagnostics.svelte'
   import SystemState from './screens/SystemState.svelte'
-  import { Router, Link, Route } from 'svelte-routing'
+
+  import { Router, Route } from 'svelte-routing'
   import { config } from './components/Drawer.config'
   export let url = ''
 
-  let routeConfig = [
+  export let EXTENSION_ID
+
+  let pages = [
     {
       path: config.DATA.PATH,
       component: SystemData,
@@ -27,12 +33,8 @@
   <Router {url}>
     <Drawer />
     <div class="container">
-      {#each routeConfig as route}
-        <Route
-          path={route.path}
-          component={route.component}
-          let:onSuccess={params}
-        />
+      {#each pages as page}
+        <Route path={page.path} component={page.component} {EXTENSION_ID} />
       {/each}
     </div>
     <div class="right-bar" />
@@ -43,12 +45,13 @@
   .container {
     flex: 1 1 auto;
     align-self: auto;
-    margin: 0 2rem;
+    margin: 0 2rem 10rem 2rem;
   }
+
   .right-bar {
     flex: 0 1 auto;
     align-self: auto;
-    width: 15rem;
+    width: 10vw;
   }
 
   main {
@@ -58,5 +61,11 @@
     justify-content: flex-start;
     align-content: flex-start;
     align-items: flex-start;
+  }
+
+  @media (min-width: 768px) and (max-width: 1281px) {
+    .container {
+      margin: 2rem;
+    }
   }
 </style>
