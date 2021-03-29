@@ -1,1 +1,4 @@
 rollup.config.js
+.eslintrc.js
+/node_modules
+/public

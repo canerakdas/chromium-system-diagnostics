@@ -35,7 +35,5 @@ module.exports = {
     'no-proto': 2,
     'no-self-compare': 2,
     'no-useless-concat': 2,
-    'camelcase': 2,
-    'max-len': 2,
   },
 }
