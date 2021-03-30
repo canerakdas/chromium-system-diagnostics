@@ -15,9 +15,6 @@ const config = {
     PATH: '/SystemDiagnostics',
     HREF: {
       DIAGNOSTIC: '#system-diagnostics',
-      CPU: '#cpu',
-      BATTERY: '#battery',
-      DISK: '#disk',
     },
   },
   STATE: {
@@ -63,25 +60,7 @@ const drawer = [
         alt: '',
         target: `${config.DATA.PATH}${config.DATA.HREF.DISK}`,
         icon: 'storage',
-      },
-      {
-        title: 'Display',
-        alt: '',
-        target: `${config.DATA.PATH}${config.DATA.HREF.DISPLAY}`,
-        icon: 'tv',
-      },
-      {
-        title: 'Network',
-        alt: '',
-        target: `${config.DATA.PATH}${config.DATA.HREF.NETWORK}`,
-        icon: 'network_wifi',
-      },
-      {
-        title: 'System',
-        alt: '',
-        target: `${config.DATA.PATH}${config.DATA.HREF.SYSTEM}`,
-        icon: 'settings',
-      },
+      }
     ],
   },
   {
@@ -89,22 +68,28 @@ const drawer = [
     separator: true,
     items: [
       {
-        title: 'CPU stress test',
+        title: 'CPU test',
         alt: '',
-        target: `${config.DIAGNOSTIC.PATH}${config.DIAGNOSTIC.HREF.CPU}`,
+        target: `${config.DIAGNOSTIC.PATH}#1`,
         icon: 'whatshot',
       },
       {
-        title: 'Battery charge test',
+        title: 'Storage test',
         alt: '',
-        target: `${config.DIAGNOSTIC.PATH}${config.DIAGNOSTIC.HREF.BATTERY}`,
-        icon: 'battery_std',
+        target: `${config.DIAGNOSTIC.PATH}#2`,
+        icon: 'storage',
       },
       {
-        title: 'Screen test',
+        title: 'Battery test',
         alt: '',
-        target: `${config.DIAGNOSTIC.PATH}${config.DIAGNOSTIC.HREF.DISK}`,
-        icon: 'tv',
+        target: `${config.DIAGNOSTIC.PATH}#3`,
+        icon: 'battery_alert',
+      },
+      {
+        title: 'Memory test',
+        alt: '',
+        target: `${config.DIAGNOSTIC.PATH}#4`,
+        icon: 'memory',
       },
     ],
   },
@@ -113,10 +98,40 @@ const drawer = [
     separator: true,
     items: [
       {
-        title: 'Screen test',
+        title: 'Network',
         alt: '',
-        target: `${config.STATE.PATH}${config.STATE.HREF.STATE}`,
+        target: `${config.STATE.PATH}#0`,
+        icon: 'public',
+      },
+      {
+        title: 'Bluetooth Devices',
+        alt: '',
+        target: `${config.STATE.PATH}#1`,
+        icon: 'bluetooth',
+      },
+      {
+        title: 'Removable Media',
+        alt: '',
+        target: `${config.STATE.PATH}#2`,
+        icon: 'usb',
+      },
+      {
+        title: 'Power',
+        alt: '',
+        target: `${config.STATE.PATH}#3`,
+        icon: 'power',
+      },
+      {
+        title: 'Display',
+        alt: '',
+        target: `${config.STATE.PATH}#4`,
         icon: 'tv',
+      },
+      {
+        title: 'Mouse & Touchpad',
+        alt: '',
+        target: `${config.STATE.PATH}#5`,
+        icon: 'mouse',
       },
     ],
   },
