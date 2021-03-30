@@ -5,7 +5,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public",
+    "start": "sirv public --single",
     "fix": "npx eslint --fix \"{,!(node_modules|public)/**/}*.{js,svelte}\"",
     "format": "npx prettier --write \"{,!(node_modules|public)/**/}*.{js,svelte}\""
   },
@@ -22,6 +22,7 @@
     "@material/drawer": "^10.0.0",
     "@material/shape": "^10.0.0",
     "@material/switch": "^10.0.0",
+    "@material/textfield": "^10.0.0",
     "@material/theme": "^10.0.0",
     "@material/typography": "^10.0.0",
     "@rollup/plugin-commonjs": "^17.0.0",
