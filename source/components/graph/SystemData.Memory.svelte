@@ -5,6 +5,10 @@
   export let EXTENSION_ID
   export let config
 
+  /**
+   * Detailed instructions for graph config:
+   * https://www.chartjs.org/docs/latest/configuration/
+   */
   const graphConfig = {
     type: 'line',
     data: {
@@ -38,11 +42,19 @@
       },
     },
   }
+
   onMount(() => {
     const context = document.getElementById('chartM').getContext('2d')
     const chart = new Chart(context, graphConfig)
 
     const memoryInformation = setInterval(() => {
+      /**
+       * Create a new memory snapshot and keep on memory
+       * https://developer.chrome.com/docs/extensions/reference/runtime/#method-sendMessage
+       *
+       * For the detailed expain of response:
+       * https://developer.chrome.com/docs/extensions/reference/system_memory/#type-MemoryInfo
+       */
       chrome.runtime.sendMessage(
         EXTENSION_ID,
         {
@@ -65,6 +77,7 @@
             }
             data.labels.push(time)
 
+            // Configuring datasets
             let datasets = graphConfig.data.datasets[0]
 
             if (datasets.data.length > config.sampleCount) {

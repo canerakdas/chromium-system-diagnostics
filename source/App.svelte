@@ -1,6 +1,4 @@
 <script>
-  import { onMount } from 'svelte'
-
   import Drawer from './components/Drawer.svelte'
 
   import SystemData from './screens/SystemData.svelte'
@@ -9,10 +7,16 @@
 
   import { Router, Route } from 'svelte-routing'
   import { config } from './components/Drawer.config'
-  export let url = ''
 
+  export let url = ''
   export let EXTENSION_ID
 
+  /**
+   * This array will help to manage your Route components
+   * @namespace
+   * @property {string} path component location path
+   * @property {component} component svelte component
+   */
   let pages = [
     {
       path: config.DATA.PATH,

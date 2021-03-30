@@ -11,7 +11,12 @@
 @use "@material/shape";
 @use "@material/dialog";
 @use "@material/switch";
+@use "@material/floating-label/mdc-floating-label";
+@use "@material/line-ripple/mdc-line-ripple";
+@use "@material/notched-outline/mdc-notched-outline";
+@use "@material/textfield";
 
+@include textfield.core-styles;
 @include switch.core-styles;
 @include dialog.core-styles;
 @include card.core-styles;

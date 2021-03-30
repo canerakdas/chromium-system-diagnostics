@@ -28,10 +28,22 @@ const config = {
   },
 }
 
+/**
+ * @namespace
+ * @property {string}  title            List header of drawer
+ * @property {boolean} separator        Separator of lists
+ * @property {object}  items            List
+ * @property {string}  items.title      List item title
+ * @property {string}  items.alt        List item anchor alt text
+ * @property {string}  items.target     List item anchor href
+ * @property {string}  items.icon       List item icon
+ * https://material.io/resources/icons/?style=baseline
+ * @property {boolean} items.active     Set default active
+ */
 const drawer = [
   {
     title: 'System Data',
-    seperator: false,
+    separator: false,
     items: [
       {
         title: 'CPU History',
@@ -74,7 +86,7 @@ const drawer = [
   },
   {
     title: 'System Diagnostic',
-    seperator: true,
+    separator: true,
     items: [
       {
         title: 'CPU stress test',
@@ -98,7 +110,7 @@ const drawer = [
   },
   {
     title: 'System State',
-    seperator: true,
+    separator: true,
     items: [
       {
         title: 'Screen test',

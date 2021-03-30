@@ -9,14 +9,24 @@
   import Chart from 'chart.js'
 
   export let EXTENSION_ID
+
+  /**
+   * 2147483648 BYTE / BYTE_TO_GB
+   * @example
+   * // returns 2
+   */
   const BYTE_TO_GB = 1073741824
+
+  /**
+   * @namespace
+   * @property {object} cpu
+   * @property {object} storage
+   * @property {object} storage.detail
+   * @property {object} memory
+   */
   let page = {
     cpu: {
-      modelName: '',
-      numOfProcessors: 0,
-      archName: '',
-      features: [],
-      numOfProcessors: 0,
+      features: []
     },
     storage: {
       detail: [],
@@ -24,6 +34,13 @@
     memory: {},
   }
 
+  /**
+   * @namespace
+   * @property {array} cpu
+   * @property {array} memory
+   * @property {int} sampleCount Limit of stored sample in memory
+   * @property {int} timeout Every {timeout} time update the graphs
+   */
   const config = {
     cpu: [],
     memory: [],
@@ -32,9 +49,22 @@
   }
 
   onMount(() => {
-    // Create a new cpu snapshot and use it as default
-    chrome.runtime.sendMessage(
+    /**
+     * Create a new storage snapshot and use it as default
+     * https://developer.chrome.com/docs/extensions/reference/runtime/#method-sendMessage
+     *
+     * For the detailed expain of response:
+     * https://developer.chrome.com/docs/extensions/reference/system_cpu/#type-CpuInfo
+     */
+    window.chrome.runtime.sendMessage(
       EXTENSION_ID,
+      /**
+       * @namespace
+       * @property {string} method Methods supported by extension;
+       * ['POST','GET','PUT','DELETE']
+       * @property {type} type Request type allows connecting specified listener;
+       * ['chromium.cpu','chromium.memory','chromium.storage']
+       */
       {
         method: 'POST',
         type: 'chromium.cpu',
@@ -47,28 +77,56 @@
       }
     )
 
-    // Create a new storage snapshot and use it as default
-    chrome.runtime.sendMessage(
+    /**
+     * Create a new storage snapshot and use it as default
+     * https://developer.chrome.com/docs/extensions/reference/runtime/#method-sendMessage
+     *
+     * For the detailed expain of response:
+     * https://developer.chrome.com/docs/extensions/reference/system_storage/#type-StorageUnitInfo
+     */
+    window.chrome.runtime.sendMessage(
       EXTENSION_ID,
+      /**
+       * @namespace
+       * @property {string} method Methods supported by extension;
+       * ['POST','GET','PUT','DELETE']
+       * @property {type} type Request type allows connecting specified listener;
+       * ['chromium.cpu','chromium.memory','chromium.storage']
+       */
       {
         method: 'POST',
         type: 'chromium.storage',
       },
       (result) => {
+        // Chrome.runtime.lastError will be defined during an API method callback if there was an error
         if (!chrome.runtime.lastError) {
           page.storage = result
         }
       }
     )
 
-    // Create a new memory snapshot and use it as default
-    chrome.runtime.sendMessage(
+    /**
+     * Create a new memory snapshot and use it as default
+     * https://developer.chrome.com/docs/extensions/reference/runtime/#method-sendMessage
+     *
+     * For the detailed expain of response:
+     * https://developer.chrome.com/docs/extensions/reference/system_memory/#type-MemoryInfo
+     */
+    window.chrome.runtime.sendMessage(
       EXTENSION_ID,
+      /**
+       * @namespace
+       * @property {string} method Methods supported by extension;
+       * ['POST','GET','PUT','DELETE']
+       * @property {type} type Request type allows connecting specified listener;
+       * ['chromium.cpu','chromium.memory','chromium.storage']
+       */
       {
         method: 'POST',
         type: 'chromium.memory',
       },
       (result) => {
+        // Chrome.runtime.lastError will be defined during an API method callback if there was an error
         if (!chrome.runtime.lastError) {
           page.memory = result
         }
@@ -78,7 +136,7 @@
 </script>
 
 <main>
-  <!-- CPU History Section -->
+  <!-- CPU History -->
   <CardTitle title="CPU History" hash="cpu" />
   <div class="mdc-card mdc-card--graph">
     <CardItemIcon
@@ -90,9 +148,9 @@
     <CpuGraph {EXTENSION_ID} {config} />
     <CardItem title="Features" description={page.cpu.features.join(' ')} />
   </div>
-  <!-- CPU History Section -->
+  <!-- CPU History -->
 
-  <!-- Memory Section -->
+  <!-- Memory -->
   <CardTitle title="Memory" hash="memory" />
   <div class="mdc-card">
     <CardItemIcon
@@ -103,9 +161,9 @@
     />
     <MemoryGraph {EXTENSION_ID} {config} />
   </div>
-  <!-- Memory Section -->
+  <!-- Memory -->
 
-  <!-- Disk Section -->
+  <!-- Disk -->
   <CardTitle title="Disks" hash="disk" />
   <div class="mdc-card">
     {#each page.storage.detail as storage}
@@ -117,7 +175,7 @@
       />
     {/each}
   </div>
-  <!-- Disk Section -->
+  <!-- Disk -->
 </main>
 
 <style>

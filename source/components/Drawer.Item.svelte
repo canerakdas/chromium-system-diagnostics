@@ -1,6 +1,6 @@
 <script>
   export let title
-  export let seperator
+  export let separator
   export let items
 
   import { Link } from 'svelte-routing'
@@ -10,7 +10,7 @@
 </script>
 
 <div>
-  {#if seperator === true}
+  {#if separator === true}
     <hr class="mdc-list-divider" />
   {/if}
   <h6 class="mdc-list-group__subheader">{title}</h6>

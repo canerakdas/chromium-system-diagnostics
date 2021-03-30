@@ -5,6 +5,10 @@
   export let EXTENSION_ID
   export let config
 
+  /**
+   * Detailed instructions for graph config:
+   * https://www.chartjs.org/docs/latest/configuration/
+   */
   const chartConfig = {
     type: 'line',
     data: {
@@ -19,7 +23,6 @@
               beginAtZero: true,
               steps: 10,
               stepValue: 5,
-              max: 100,
               fontColor: 'rgba(95, 99, 104,0.5)',
             },
           },
@@ -40,6 +43,13 @@
     const context = document.getElementById('chart').getContext('2d')
     const chart = new Chart(context, chartConfig)
 
+    /**
+     * Create a new cpu snapshot and keep on memory
+     * https://developer.chrome.com/docs/extensions/reference/runtime/#method-sendMessage
+     *
+     * For the detailed expain of response:
+     * https://developer.chrome.com/docs/extensions/reference/system_cpu/#type-CpuInfo
+     */
     const information = setInterval(() => {
       chrome.runtime.sendMessage(
         EXTENSION_ID,
@@ -99,6 +109,13 @@
                 const t1 = result.processors[index]
                 const t2 = temp.processors[index]
 
+                /**
+                 * @namespace
+                 * @property {int} t1 sample 1
+                 * @property {int} t2 sample 2
+                 * @property {float} time seconds passed between two samples
+                 * @property {float} percent CPU usage on percent format
+                 */
                 const usage = {
                   t1: 0,
                   t2: 0,
@@ -106,9 +123,15 @@
                   percent: 0,
                 }
 
+                // Total usage of sample 1
                 usage.t1 = t1.usage.kernel + t1.usage.user
+
+                // total usage of sample 2
                 usage.t2 = t2.usage.kernel + t2.usage.user
+
+                // How many seconds passed between two samples
                 usage.time = (result.time - temp.time) / 1000
+
                 usage.percent = (usage.t1 - usage.t2) / usage.time
 
                 if (data.datasets[index].data.length > config.sampleCount) {

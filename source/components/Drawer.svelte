@@ -3,7 +3,9 @@
   import { drawer } from './Drawer.config'
 
   $: Drawer = drawer
-
+  /** Set active clicked anchor element
+   * @param {object} event
+   */
   function handleActive(event) {
     Drawer.map((e) => {
       e.items.map((item) => {
@@ -18,7 +20,10 @@
     })
   }
 
+  // Page width
   let width
+
+  // Drawer responsive mode
   let active = false
 </script>
 
