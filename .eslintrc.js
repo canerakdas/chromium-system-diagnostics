@@ -19,7 +19,7 @@ module.exports = {
     'no-console': 2,
     'no-alert': 2,
     'no-debugger': 2,
-    eqeqeq: 2,
+    'eqeqeq': 2,
     'no-extra-parens': 2,
     'default-case-last': 2,
     'guard-for-in': 2,
