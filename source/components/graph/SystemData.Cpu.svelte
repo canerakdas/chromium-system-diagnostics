@@ -51,14 +51,14 @@
      * https://developer.chrome.com/docs/extensions/reference/system_cpu/#type-CpuInfo
      */
     const information = setInterval(() => {
-      chrome.runtime.sendMessage(
+      window.chrome.runtime.sendMessage(
         EXTENSION_ID,
         {
           method: 'POST',
           type: 'chromium.cpu',
         },
         (result) => {
-          if (!chrome.runtime.lastError) {
+          if (!window.chrome.runtime.lastError) {
             let data = chartConfig.data
 
             config.cpu.push({
@@ -73,19 +73,29 @@
 
             // When the program works first time, create datasets and identify with random color
             if (data.datasets.length === 0) {
+              let COLOR_OFFSET = 50
+              let COLOR_SPACE = 205
               for (let i = 0; i < result.processors.length; i++) {
+                /**
+                 * This function provides random color code between offset - limit
+                 * @param {int} offset color starts with
+                 * @param {int} limit color ends with
+                */
                 function color(offset, limit) {
                   return Math.round(Math.random() * limit + offset)
                 }
+                /**
+                 * Chart dataset
+                 */
                 data.datasets.push({
                   label: `CPU ${i + 1}`,
                   data: [],
                   backgroundColor: ['rgba(255, 255, 255, 0)'],
                   borderColor: [
                     `rgba(
-                      ${color(50, 205)},
-                      ${color(50, 205)},
-                      ${color(50, 205)},1)`,
+                      ${color(COLOR_OFFSET, COLOR_SPACE)},
+                      ${color(COLOR_OFFSET, COLOR_SPACE)},
+                      ${color(COLOR_OFFSET, COLOR_SPACE)},1)`,
                   ],
                   borderWidth: 2,
                 })
@@ -104,7 +114,7 @@
               const temp = config.cpu.slice(-2, -1)[0]
               if (
                 typeof temp !== 'undefined' &&
-                temp.hasOwnProperty('processors') === true
+                Object.prototype.hasOwnProperty.call(temp, 'processors') === true
               ) {
                 const t1 = result.processors[index]
                 const t2 = temp.processors[index]

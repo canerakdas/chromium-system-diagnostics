@@ -55,14 +55,14 @@
        * For the detailed expain of response:
        * https://developer.chrome.com/docs/extensions/reference/system_memory/#type-MemoryInfo
        */
-      chrome.runtime.sendMessage(
+      window.chrome.runtime.sendMessage(
         EXTENSION_ID,
         {
           method: 'POST',
           type: 'chromium.memory',
         },
         (result) => {
-          if (!chrome.runtime.lastError) {
+          if (!window.chrome.runtime.lastError) {
             let data = graphConfig.data
 
             if (config.memory.length > config.sampleCount) {
@@ -85,7 +85,7 @@
             }
 
             datasets.data.push(
-              (result.availableCapacity / result.capacity) * 100
+              result.availableCapacity / result.capacity * 100
             )
 
             chart.update()

@@ -23,6 +23,8 @@
   // Page width
   let width
 
+  const TABLET_X = 1280
+
   // Drawer responsive mode
   let active = false
 </script>
@@ -31,12 +33,12 @@
   <i
     class="material-icons open-drawer"
     aria-hidden="true"
-    on:click={() => (active = !active)}>menu</i
+    on:click={() => active = !active}>menu</i
   >
 </header>
 <svelte:window bind:innerWidth={width} />
 <aside
-  class={width < 1280 ? 'mdc-drawer mdc-drawer--modal' : 'mdc-drawer'}
+  class={width < TABLET_X ? 'mdc-drawer mdc-drawer--modal' : 'mdc-drawer'}
   class:mdc-drawer--open={active}
 >
   <div class="mdc-drawer__content">
@@ -47,7 +49,7 @@
     </nav>
   </div>
 </aside>
-<div class="mdc-drawer-scrim" on:click={() => (active = !active)} />
+<div class="mdc-drawer-scrim" on:click={() => active = !active} />
 
 <style>
   .mdc-drawer {

@@ -6,10 +6,9 @@
   import CardItemIcon from '../components/CardItemIcon.svelte'
   import CpuGraph from '../components/graph/SystemData.Cpu.svelte'
   import MemoryGraph from '../components/graph/SystemData.Memory.svelte'
-  import Chart from 'chart.js'
 
   export let EXTENSION_ID
-
+  const FIXED_POINT = 2
   /**
    * 2147483648 BYTE / BYTE_TO_GB
    * @example
@@ -26,7 +25,7 @@
    */
   let page = {
     cpu: {
-      features: []
+      features: [],
     },
     storage: {
       detail: [],
@@ -70,7 +69,7 @@
         type: 'chromium.cpu',
       },
       (result) => {
-        if (!chrome.runtime.lastError) {
+        if (!window.chrome.runtime.lastError) {
           config.cpu.push(result)
           page.cpu = { ...result }
         }
@@ -99,7 +98,7 @@
       },
       (result) => {
         // Chrome.runtime.lastError will be defined during an API method callback if there was an error
-        if (!chrome.runtime.lastError) {
+        if (!window.chrome.runtime.lastError) {
           page.storage = result
         }
       }
@@ -127,7 +126,7 @@
       },
       (result) => {
         // Chrome.runtime.lastError will be defined during an API method callback if there was an error
-        if (!chrome.runtime.lastError) {
+        if (!window.chrome.runtime.lastError) {
           page.memory = result
         }
       }
@@ -157,7 +156,7 @@
       title="Capacity"
       description=""
       icon="memory"
-      fragment={(page.memory.capacity / BYTE_TO_GB).toFixed(2)}
+      fragment={(page.memory.capacity / BYTE_TO_GB).toFixed(FIXED_POINT)}
     />
     <MemoryGraph {EXTENSION_ID} {config} />
   </div>
@@ -171,7 +170,7 @@
         title={storage.name}
         description={storage.id}
         icon="save"
-        fragment={(storage.capacity / 1000000000).toFixed(2)}
+        fragment={(storage.capacity / 1000000000).toFixed(FIXED_POINT)}
       />
     {/each}
   </div>
