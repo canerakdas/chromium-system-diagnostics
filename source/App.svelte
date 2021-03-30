@@ -1,12 +1,12 @@
 <script>
-  import Drawer from './components/Drawer.svelte'
+  import Drawer from './components/drawer/Drawer.svelte'
 
   import SystemData from './screens/SystemData.svelte'
   import SystemDiagnostics from './screens/SystemDiagnostics.svelte'
   import SystemState from './screens/SystemState.svelte'
 
   import { Router, Route } from 'svelte-routing'
-  import { config } from './components/Drawer.config'
+  import { config } from './components/drawer/config.js'
 
   export let url = ''
   export let EXTENSION_ID

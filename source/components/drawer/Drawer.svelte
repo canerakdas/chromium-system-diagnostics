@@ -1,6 +1,6 @@
 <script>
-  import Item from './Drawer.Item.svelte'
-  import { drawer } from './Drawer.config'
+  import Item from './Item.svelte'
+  import { drawer } from './config.js'
 
   $: Drawer = drawer
   /** Set active clicked anchor element
@@ -33,7 +33,7 @@
   <i
     class="material-icons open-drawer"
     aria-hidden="true"
-    on:click={() => active = !active}>menu</i
+    on:click={() => (active = !active)}>menu</i
   >
 </header>
 <svelte:window bind:innerWidth={width} />
@@ -49,7 +49,7 @@
     </nav>
   </div>
 </aside>
-<div class="mdc-drawer-scrim" on:click={() => active = !active} />
+<div class="mdc-drawer-scrim" on:click={() => (active = !active)} />
 
 <style>
   .mdc-drawer {

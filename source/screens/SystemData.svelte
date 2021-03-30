@@ -1,9 +1,9 @@
 <script>
   import { onMount } from 'svelte'
 
-  import CardItem from '../components/CardItem.svelte'
-  import CardTitle from '../components/CardTitle.svelte'
-  import CardItemIcon from '../components/CardItemIcon.svelte'
+  import CardItem from '../components/card/Item.svelte'
+  import CardTitle from '../components/card/Title.svelte'
+  import CardItemIcon from '../components/card/Icon.svelte'
   import CpuGraph from '../components/graph/SystemData.Cpu.svelte'
   import MemoryGraph from '../components/graph/SystemData.Memory.svelte'
 
