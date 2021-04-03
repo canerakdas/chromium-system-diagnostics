@@ -27,6 +27,11 @@
           dispatch('setActive', {
             item: Item,
           })
+
+          // Router workaround
+          if (window.location.pathname === Item.target.split('#')[0]) {
+            window.location = Item.target
+          }
         }}
       >
         <span class="mdc-list-item__ripple" />
